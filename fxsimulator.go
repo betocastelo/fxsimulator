@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"github.com/betocastelo/fxsimulator/fxsimlib"
 	"os"
 )
 
@@ -22,7 +20,7 @@ func main() {
 		printUsageAndExit(1)
 	}
 
-	results := fxsim.FxForward(*expectedForwardRateArg, *volatilityArg,
+	results := FxForward(*expectedForwardRateArg, *volatilityArg,
 		*timeToMaturityArg, *lengthOfSimulationArg)
 
 	for _, result := range results {

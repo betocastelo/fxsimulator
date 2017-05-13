@@ -1,4 +1,4 @@
-package simplestats
+package main
 
 import (
 	"math/rand"

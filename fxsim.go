@@ -1,4 +1,4 @@
-package fxsim
+package main
 
 import (
 	"math"

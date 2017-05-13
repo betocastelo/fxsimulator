@@ -1,10 +1,8 @@
-package fxsim
+package main
 
 import (
 	"math"
 	"testing"
-
-	"github.com/betocastelo/fxsimulator/simplestatslib"
 )
 
 type simParameters struct {
@@ -23,7 +21,7 @@ var (
 func TestFxForwardCorrectness(t *testing.T) {
 	t.Run("Must have mean = ln(F0)/T-.5*vol^2", func(t *testing.T) {
 		samples := produceModifiedSimDataForTesting(standardCase)
-		mean := simplestats.CalculateMean(samples)
+		mean := CalculateMean(samples)
 		target := math.Log(standardCase.expectedFwdRate)/float64(standardCase.timeToMaturity) -
 			0.5*math.Pow(standardCase.volatility, 2)
 		lowerBoundTarget := target - epsilon
@@ -36,7 +34,7 @@ func TestFxForwardCorrectness(t *testing.T) {
 
 	t.Run("Must have standardDeviation = volatility", func(t *testing.T) {
 		samples := produceModifiedSimDataForTesting(standardCase)
-		standardDeviation := simplestats.CalculateStandardDeviation(samples)
+		standardDeviation := CalculateStandardDeviation(samples)
 		lowerBoundTarget := standardCase.volatility - epsilon
 		upperBoundTarget := standardCase.volatility + epsilon
 
@@ -52,7 +50,7 @@ func TestFxForwardCorrectness(t *testing.T) {
 		upperBoundTarget := epsilon
 
 		t.Run("Must have mean = 0", func(t *testing.T) {
-			mean := simplestats.CalculateMean(samples)
+			mean := CalculateMean(samples)
 
 			if mean < lowerBoundTarget || mean > upperBoundTarget {
 				t.Error("mean =", mean, "instead of 0, within range of", epsilon)
@@ -60,7 +58,7 @@ func TestFxForwardCorrectness(t *testing.T) {
 		})
 
 		t.Run("Must have standardDeviation = 0", func(t *testing.T) {
-			standardDeviation := simplestats.CalculateStandardDeviation(samples)
+			standardDeviation := CalculateStandardDeviation(samples)
 
 			if standardDeviation < lowerBoundTarget || standardDeviation > upperBoundTarget {
 				t.Error("standardDeviation =", standardDeviation, "instead of 0, within range of",
