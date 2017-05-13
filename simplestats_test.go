@@ -22,7 +22,7 @@ func TestCalculateStandardDeviationCorrectnessWithGoRandNormal(t *testing.T) {
 		standardDeviation := CalculateStandardDeviation(samples)
 
 		if standardDeviation < lowerTargetBound || standardDeviation > upperTargetBound {
-			t.Error("Standard deviation found", standardDeviation, ", expected close to 1")
+			t.Errorf("Standard deviation found: %v, expected 1 ± %v", standardDeviation, epsilon)
 		}
 	})
 
@@ -32,7 +32,7 @@ func TestCalculateStandardDeviationCorrectnessWithGoRandNormal(t *testing.T) {
 		mean := CalculateMean(samples)
 
 		if mean < lowerTargetBound || mean > upperTargetBound {
-			t.Error("Mean found", mean, ", expected close to 0")
+			t.Error("Mean found: %v, expected 0 ± %v", mean, epsilon)
 		}
 	})
 }

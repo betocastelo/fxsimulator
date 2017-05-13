@@ -28,7 +28,7 @@ func TestFxForwardCorrectness(t *testing.T) {
 		upperBoundTarget := target + epsilon
 
 		if mean < lowerBoundTarget || mean > upperBoundTarget {
-			t.Error("mean =", mean, "instead of 0, within range of", epsilon)
+			t.Errorf("mean = %v instead of %v, ± %v", mean, target, epsilon)
 		}
 	})
 
@@ -39,8 +39,8 @@ func TestFxForwardCorrectness(t *testing.T) {
 		upperBoundTarget := standardCase.volatility + epsilon
 
 		if standardDeviation < lowerBoundTarget || standardDeviation > upperBoundTarget {
-			t.Error("standardDeviation =", standardDeviation, "instead of",
-				standardCase.volatility, "within range of", epsilon)
+			t.Errorf("standardDeviation = %v instead of %v, ± %v", standardDeviation,
+				standardCase.volatility, epsilon)
 		}
 	})
 
